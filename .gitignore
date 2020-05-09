@@ -1,0 +1,10 @@
+node_modules/
+build/
+
+.idea/.gitignore
+.idea/gold-medal-metrics.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/sonarlint/
+.idea/vcs.xml
+package-lock.json
