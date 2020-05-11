@@ -6,7 +6,7 @@ Returns a SQL query string that will create the Country table with four columns:
 */
 
 const createCountryTable = () => {
-  return;
+  return "create table Country(name text not null, code text not null, gdp int, population int);\n";
 };
 
 /*
@@ -14,7 +14,7 @@ Returns a SQL query string that will create the GoldMedal table with ten columns
 */
 
 const createGoldMedalTable = () => {
-  return;
+  return "create table GoldMedal(id int primary key, year int not null , city text not null , season text not null ,name text not null , country text not null , gender text not null , sport text not null , discipline text not null , event text not null )";
 };
 
 /*
@@ -22,20 +22,21 @@ Returns a SQL query string that will find the number of gold medals for the give
 */
 
 const goldMedalNumber = country => {
-    return;
+    return `select count(*) as count from GoldMedal where country = '${country}';`;
 };
 
 /*
-Returns a SQL query string that will find the year where the given country 
+Returns a SQL query string that will find the year where the given country
 won the most summer medals, along with the number of medals aliased to 'count'.
 */
 
 const mostSummerWins = country => {
-  return;
+  var summer = 'Summer';
+  return `select year from GoldMedal where Country = '${country}' and season = '${summer}' GROUP by year ORDER by count(*) desc LIMIT 1`;
 };
 
 /*
-Returns a SQL query string that will find the year where the given country 
+Returns a SQL query string that will find the year where the given country
 won the most winter medals, along with the number of medals aliased to 'count'.
 */
 
@@ -44,7 +45,7 @@ const mostWinterWins = country => {
 };
 
 /*
-Returns a SQL query string that will find the year where the given country 
+Returns a SQL query string that will find the year where the given country
 won the most medals, along with the number of medals aliased to 'count'.
 */
 
@@ -53,7 +54,7 @@ const bestYear = country => {
 };
 
 /*
-Returns a SQL query string that will find the discipline this country has 
+Returns a SQL query string that will find the discipline this country has
 won the most medals, along with the number of medals aliased to 'count'.
 */
 
@@ -62,7 +63,7 @@ const bestDiscipline = country => {
 };
 
 /*
-Returns a SQL query string that will find the sport this country has 
+Returns a SQL query string that will find the sport this country has
 won the most medals, along with the number of medals aliased to 'count'.
 */
 
@@ -71,7 +72,7 @@ const bestSport = country => {
 };
 
 /*
-Returns a SQL query string that will find the event this country has 
+Returns a SQL query string that will find the event this country has
 won the most medals, along with the number of medals aliased to 'count'.
 */
 
