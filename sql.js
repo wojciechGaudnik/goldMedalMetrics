@@ -69,7 +69,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestSport = country => {
-  return;
+  return `select sport, count(*) as count from GoldMedal where country = '${country}' group by sport order by count(*) desc limit 1`;
 };
 
 /*
