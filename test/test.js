@@ -16,7 +16,7 @@ function getCount(row) {
   }
 }
 
-describe('createCountryTable', function() {
+describe('createCountry2Table', function() {
   afterEach(function(done) {
     emptyDb.run('DROP TABLE IF EXISTS Country', done);
   });

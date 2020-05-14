@@ -6,7 +6,7 @@ Returns a SQL query string that will create the Country table with four columns:
 */
 
 const createCountryTable = () => {
-  return "create table Country(name text not null, code text not null, gdp int, population int);\n";
+  return 'create table Country(name text not null, code text not null, gdp int, population int);';
 };
 
 /*
@@ -14,7 +14,7 @@ Returns a SQL query string that will create the GoldMedal table with ten columns
 */
 
 const createGoldMedalTable = () => {
-  return "create table GoldMedal(id int primary key, year int not null , city text not null , season text not null ,name text not null , country text not null , gender text not null , sport text not null , discipline text not null , event text not null )";
+  return 'create table GoldMedal(id int primary key, year int not null , city text not null , season text not null ,name text not null , country text not null , gender text not null , sport text not null , discipline text not null , event text not null )';
 };
 
 /*
@@ -32,7 +32,7 @@ won the most summer medals, along with the number of medals aliased to 'count'.
 
 const mostSummerWins = country => {
   var summer = 'Summer';
-  return `select year from GoldMedal where Country = '${country}' and season = '${summer}' GROUP by year ORDER by count(*) desc LIMIT 1`;
+  return `select year, count(*) as count from GoldMedal where country = '${country}' and season = '${summer}' GROUP by year ORDER by count(*) desc LIMIT 1`;
 };
 
 /*
@@ -41,7 +41,8 @@ won the most winter medals, along with the number of medals aliased to 'count'.
 */
 
 const mostWinterWins = country => {
-  return;
+  var winter = 'Winter';
+  return `select year, count(*) as count from GoldMedal where country = '${country}' and season = '${winter}' GROUP by year ORDER by count(*) desc LIMIT 1`;
 };
 
 /*
@@ -50,7 +51,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestYear = country => {
-  return;
+  return `select count(*) as count from GoldMedal where country = '${country}' group by year order by count(*) desc limit 1`;
 };
 
 /*
