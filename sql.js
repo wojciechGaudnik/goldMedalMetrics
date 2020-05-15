@@ -86,7 +86,7 @@ Returns a SQL query string that will find the number of male medalists.
 */
 
 const numberMenMedalists = country => {
-  return;
+  return `select count(distinct name) from GoldMedal where country = '${country}' and gender = 'Men'`;
 };
 
 /*
@@ -94,7 +94,7 @@ Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-  return;
+  return `select count(distinct name) from GoldMedal where country = '${country}' and gender = 'Women'`;
 };
 
 /*
@@ -102,7 +102,7 @@ Returns a SQL query string that will find the athlete with the most medals.
 */
 
 const mostMedaledAthlete = country => {
-  return;
+  return `select name from GoldMedal where country = '${country}' group by name order by count(*) desc limit 1`;
 };
 
 /*
@@ -111,7 +111,15 @@ optionally ordered by the given field in the specified direction.
 */
 
 const orderedMedals = (country, field, sortAscending) => {
-  return;
+  let orderBy = "";
+  if (field) {
+    if (sortAscending) {
+      orderBy = `order by ${field} asc`;
+    } else {
+      orderBy = `order by ${field} desc`;
+    }
+  }
+  return `select * from GoldMedal where country = '${country}' ${orderBy}`;
 };
 
 /*
@@ -121,9 +129,18 @@ as well as the percentage of this country's wins the sport represents,
 aliased as 'percent'. Optionally ordered by the given field in the specified direction.
 */
 
-const orderedSports = (country, field, sortAscending) => {
-  return;
+const orderedSports = (country, field, isAscending) => {
+  let orderBy = '';
+  if (field) {
+    if (isAscending) {
+      orderBy = `order by ${field} asc`;
+    } else {
+      orderBy = `order by ${field} desc`;
+    }
+  }
+  return `select sport, count(sport) as count, (count(sport) * 100 / (select count(*) from GoldMedal where country = '${country}')) as percent from GoldMedal where country = '${country}' group by sport ${orderBy};`;
 };
+
 
 module.exports = {
   createCountryTable,
